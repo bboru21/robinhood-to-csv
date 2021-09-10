@@ -8,6 +8,7 @@ import argparse
 import ast
 from dotenv import load_dotenv, find_dotenv
 import os
+import json
 
 logged_in = False
 
@@ -27,11 +28,14 @@ parser.add_argument(
     '--profit', action='store_true', help='calculate profit for each sale')
 parser.add_argument(
     '--dividends', action='store_true', help='export dividend payments')
+parser.add_argument(
+    '--delimiter', type=str, default=',', help='string value with which to delimit csv values')
 args = parser.parse_args()
 username = args.username
 password = args.password
 mfa_code = args.mfa_code
 device_token = args.device_token
+delimiter = args.delimiter
 
 load_dotenv(find_dotenv())
 
@@ -118,15 +122,24 @@ else:
 # CSV headers
 keys = fields[0].keys()
 keys = sorted(keys)
-csv = ','.join(keys) + "\n"
+csv = delimiter.join(keys) + "\n"
 
 # CSV rows
+json_fields = (
+    'executed_notional',
+    'total_notional',
+)
 for row in fields:
     for idx, key in enumerate(keys):
         if (idx > 0):
-            csv += ","
+            csv += delimiter
         try:
-            csv += str(fields[row][key])
+            if key in json_fields:
+                # convert dict to JSON str, surround with single quotes to enable proper csv parsing
+                value = f"'{json.dumps(fields[row][key])}'"
+            else:
+                value = str(fields[row][key])
+            csv += value
         except:
             csv += ""
 
