@@ -1,6 +1,12 @@
 # Robinhood to CSV
 
-Fork of the Robinhood to CSV repository. To keep them synced:
+Fork of the [Robinhood to CSV repository][0] by [joshfraser][1].
+
+In order to keep them synced, one time only add the repo to upstream:
+
+    git remote add upstream https://github.com/joshfraser/robinhood-to-csv
+
+Then periodically merge the latest from upstream/master:
 
     git fetch upstream
     git checkout master
@@ -35,3 +41,6 @@ For Device_Token go to your browser
     Click the one that's not 0 bytes in size
     Click on Headers, then scroll down to the Request Payload section
     Here, you'll see new JSON parameters for your login. What you'll need here is the device token.
+
+[0][https://github.com/joshfraser/robinhood-to-csv]
+[1][https://github.com/joshfraser]
