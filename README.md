@@ -42,5 +42,5 @@ For Device_Token go to your browser
     Click on Headers, then scroll down to the Request Payload section
     Here, you'll see new JSON parameters for your login. What you'll need here is the device token.
 
-[0][https://github.com/joshfraser/robinhood-to-csv]
-[1][https://github.com/joshfraser]
+[0]: https://github.com/joshfraser/robinhood-to-csv
+[1]: https://github.com/joshfraser
